@@ -14,3 +14,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
+
+@theme {
+  --font-inter: "Inter", "sans-serif";
+  --font-heebo: "Heebo", "sans-serif";
+}
