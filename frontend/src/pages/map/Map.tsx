@@ -73,13 +73,13 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
           (error) => {
             console.error(`Geolocation error: ${error.message}`);
             // Default to Winston-Salem
-            resolve({ latitude: 36.1319, longitude: -80.2553 });
+            // resolve({ latitude: 36.1319, longitude: -80.2553 });
           }
         );
       } else {
         console.log("Geolocation is not supported by this browser.");
         // Default to Winston-Salem
-        resolve({ latitude: 36.1319, longitude: -80.2553 });
+        // resolve({ latitude: 36.1319, longitude: -80.2553 });
       }
     });
   };
@@ -134,6 +134,7 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
 
       let my_current_location = await getCurrentLocation();
       setUserLocation(my_current_location);
+      console.log("my_current_location", my_current_location);
       center = new window.google.maps.LatLng(
         my_current_location.latitude,
         my_current_location.longitude
