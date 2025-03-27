@@ -1,4 +1,4 @@
-import { RequestHandler } from "express";
+import { Request, RequestHandler, Response } from "express";
 import Groq from "groq-sdk";
 
 interface ChatRequest {
@@ -6,7 +6,10 @@ interface ChatRequest {
   tag: string;
 }
 
-export const getChatResponse: RequestHandler = async (req, res) => {
+export const getChatResponse: RequestHandler = async (
+  req: Request,
+  res: Response
+) => {
   const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
   });
