@@ -1,8 +1,39 @@
-import { SendHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 import ChatNavBar from "./ChatNavBar";
 import ChatMessages from "./ChatMessages";
-
+import { SendHorizontal } from "lucide-react";
+import axios from "axios";
+import Map from "../map/Map";
 const Chat: React.FC = () => {
+  const [prompt, setPrompt] = useState<string>("");
+  const [messages, setMessages] = useState<string[]>([]);
+
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  useEffect(() => {
+    console.log("logging");
+  }, []);
+
+  const analyzePrompt = async () => {
+    const response = await axios.post(
+      `${BACKEND_URL}/chat/get-chat-response`,
+      { prompt },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+  };
+
+  const handleSendMessage = () => {
+    console.log(prompt);
+    setPrompt("");
+    setMessages([...messages, prompt]);
+    analyzePrompt();
+  };
+
   return (
     <div className="h-screen overflow-hidden flex flex-col relative">
       <ChatNavBar />
@@ -10,7 +41,6 @@ const Chat: React.FC = () => {
         <img
           src="/assets/city_of_winston_salem_logo.jpg"
           alt="city_of_winston_salem"
-          // className="w-1/3 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30 z-1"
           className="opacity-30 w-[40%]"
         />
       </div>
@@ -28,6 +58,7 @@ const Chat: React.FC = () => {
         </div>
         <div>
           <ChatMessages />
+          <Map apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} />
         </div>
         <div
           className="w-full flex justify-center items-center mb-10 border-y border-gray-300 py-6 px-5"
@@ -39,6 +70,8 @@ const Chat: React.FC = () => {
               placeholder="Write a message"
               className=" outline-none resize-none leading-tight max-h-[500px]  overflow-hidden placeholder:font-[inter] placeholder:text-gray-400 placeholder:text-md"
               rows={1}
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
             />
           </div>
           <SendHorizontal
@@ -48,7 +81,7 @@ const Chat: React.FC = () => {
             className="z-10000"
             onClick={(event) => {
               event.stopPropagation();
-              console.log("clicked");
+              handleSendMessage();
             }}
           />
         </div>
