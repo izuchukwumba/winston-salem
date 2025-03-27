@@ -61,7 +61,7 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
     latitude: number;
     longitude: number;
   }> => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
