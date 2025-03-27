@@ -3,7 +3,7 @@ import ChatNavBar from "./ChatNavBar";
 import ChatMessages from "./ChatMessages";
 import { SendHorizontal } from "lucide-react";
 import axios from "axios";
-import Map from "../map/Map";
+
 const Chat: React.FC = () => {
   const [newPrompt, setNewPrompt] = useState<{
     prompt: string;
@@ -98,13 +98,7 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat input */}
-      {/* <div className="relative z-50 flex flex-col h-full justify-between"> */}
       <div>
-        {/* <div>
-          <ChatMessages messages={messages} />
-        </div> */}
-        {/* <Map apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} /> */}
-
         <div
           className="w-full flex justify-center items-center mb-10 border-y border-gray-300 py-6 px-5"
           onClick={() => document.getElementById("messageBox")?.focus()}

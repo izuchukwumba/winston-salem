@@ -9,7 +9,7 @@ export const DEFAULT_LOCATION = {
 export const MAP_CONFIG = {
   defaultZoom: 11,
   closeZoom: 18,
-  searchRadius: 0.2, // Degrees for search area (approximately 20km)
+  searchRadius: 0.0005, // Degrees for search area (approximately 500m)
   mapId: "DEMO_MAP_ID",
 };
 

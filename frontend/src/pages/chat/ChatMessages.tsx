@@ -5,7 +5,7 @@ import Map from "../map/Map";
 const Questions: React.FC<{ content: string }> = ({ content }) => {
   return (
     <div className="flex flex-col gap-y-1 items-end mr-4">
-      <div className="text-white text-lg bg-gray-800 rounded-lg py-2 px-4">
+      <div className="text-white text-lg font-[inter] bg-gray-800 rounded-lg py-2 px-4">
         {content}
       </div>
       <div className="text-gray-500 text-xs mr-1">
@@ -84,37 +84,35 @@ const ChatMessages: React.FC<{
       {messages.map((message, index) => {
         if (message.tag === "question") {
           return <Questions content={message.content} key={index} />;
-        } else {
-          if (message.query_type === "map") {
-            return (
-              <div className="mb-5">
-                <div className="text-black italic text-md ml-4 mt-2 mb-2">
-                  Searching for &quot;{message.map_query}&quot;...
-                </div>
-                <div className="overflow-hidden flex flex-col relative">
-                  <div className="flex-grow flex justify-center items-center">
-                    <div className="w-[90%] h-[50%] ">
-                      <Map
-                        apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-                        searchQuery={message.map_query}
-                      />
-                    </div>
+        } else if (message.query_type === "map") {
+          return (
+            <div className="mb-5">
+              <div className="text-black italic text-md ml-5 mt-2 mb-2">
+                Searching for &quot;{message.map_query}&quot;...
+              </div>
+              <div className="overflow-hidden flex flex-col relative">
+                <div className="flex-grow flex justify-center items-center">
+                  <div className="w-[90%] h-[50%] ">
+                    <Map
+                      apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                      searchQuery={message.map_query}
+                    />
                   </div>
                 </div>
-                <div className="text-black italic text-md ml-4 mt-2 mb-2">
-                  <a
-                    href={`https://www.google.com/maps/search/${message.map_query}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View on Google Maps
-                  </a>
-                </div>
               </div>
-            );
-          } else {
-            return <Answers content={message.content} key={index} />;
-          }
+              <div className="text-black italic text-md ml-5 mt-2 mb-2">
+                <a
+                  href={`https://www.google.com/maps/search/${message.map_query}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on Google Maps
+                </a>
+              </div>
+            </div>
+          );
+        } else {
+          return <Answers content={message.content} key={index} />;
         }
       })}
     </div>

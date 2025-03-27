@@ -25,7 +25,7 @@ export const searchPlaces_controller = async (req: Request, res: Response) => {
       query: query as string,
       lat: parseFloat(lat as string),
       lng: parseFloat(lng as string),
-      radius: radius ? parseFloat(radius as string) : MAP_CONFIG.searchRadius,
+      radius: MAP_CONFIG.searchRadius,
       openNow: openNow === "true",
     };
     // Perform search

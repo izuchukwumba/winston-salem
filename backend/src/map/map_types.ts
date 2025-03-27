@@ -42,6 +42,16 @@ export interface SearchParams {
   radius?: number;
   openNow?: boolean;
   minRating?: number;
+  locationRestriction?: {
+    southwest: {
+      lat: number;
+      lng: number;
+    };
+    northeast: {
+      lat: number;
+      lng: number;
+    };
+  };
 }
 
 // Direction request parameters

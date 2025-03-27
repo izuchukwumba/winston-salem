@@ -3,6 +3,8 @@
 import { Client } from "@googlemaps/google-maps-services-js";
 import { Place, SearchParams } from "./map_types";
 import { MAP_CONFIG, SEARCH_CONFIG } from "./map_config";
+import axios from "axios";
+
 import dotenv from "dotenv";
 dotenv.config();
 class BackendMapService {
@@ -21,29 +23,95 @@ class BackendMapService {
    * @returns Array of places
    */
   async searchPlaces(params: SearchParams): Promise<Place[]> {
-    try {
-      // Create bounds for search area
+    // try {
+    //   // const radius = params.radius; // Convert degrees to meters (roughly)
+    //   const southwestCorner = {
+    //     lat: params.lat - 0.5,
+    //     lng: params.lng - 0.5,
+    //   };
+    //   const northeastCorner = {
+    //     lat: params.lat + 0.5,
+    //     lng: params.lng + 0.5,
+    //   };
+    //   // Use Google Maps Places API
+    //   const response = await this.client.textSearch({
+    //     params: {
+    //       query: params.query,
+    //       location: `${params.lat},${params.lng}`,
+    //       // radius: params.radius,
+    //       locationRestriction: {
+    //         southwest: southwestCorner,
+    //         northeast: northeastCorner,
+    //       },
+    //       key: this.apiKey,
+    //       language: SEARCH_CONFIG.language as any,
+    //       region: SEARCH_CONFIG.region,
+    //       opennow: params.openNow,
+    //     },
+    //   });
 
-      // Use Google Maps Places API
-      const response = await this.client.textSearch({
+    //   if (response.data.status !== "OK") {
+    //     console.error(`Google Places API Error: ${response.data.status}`);
+    //     return [];
+    //   }
+
+    //   // const filteredResults = response.data.results.filter((place: any) => {
+    //   //   const placeLat = place.geometry.location.lat;
+    //   //   const placeLng = place.geometry.location.lng;
+
+    //   //   const distance = this.calculateDistance(
+    //   //     params.lat,
+    //   //     params.lng,
+    //   //     placeLat,
+    //   //     placeLng
+    //   //   );
+
+    //   //   return distance <= radius / 1000;
+    //   // });
+
+    //   // Map Google Places results to our Place interface
+    //   return response.data.results.map((place: any) => ({
+    //     id: place.place_id,
+    //     displayName: place.name,
+    //     location: {
+    //       lat: place.geometry.location.lat,
+    //       lng: place.geometry.location.lng,
+    //     },
+    //     businessStatus: place.business_status,
+    //     primaryType: place.types?.length > 0 ? place.types[0] : undefined,
+    //     primaryTypeDisplayName:
+    //       place.types?.length > 0
+    //         ? this.formatPlaceType(place.types[0])
+    //         : undefined,
+    //     formattedAddress: place.formatted_address,
+    //     rating: place.rating,
+    //     userRatingCount: place.user_ratings_total,
+    //   }));
+    try {
+      const url = "https://maps.googleapis.com/maps/api/place/textsearch/json";
+      const bounds = {
+        southwest: {
+          lat: params.lat - 0.1111,
+          lng: params.lng - 0.1111,
+        },
+        northeast: {
+          lat: params.lat + 0.1111,
+          lng: params.lng + 0.1111,
+        },
+      };
+      const response = await axios.get(url, {
         params: {
           query: params.query,
-          location: `${params.lat},${params.lng}`,
-          radius: params.radius,
+          locationRestriction: bounds,
+          opennow: true,
+          language: "en-US",
           key: this.apiKey,
-          language: SEARCH_CONFIG.language as any,
-          region: SEARCH_CONFIG.region,
-          opennow: params.openNow,
         },
       });
-
-      if (response.data.status !== "OK") {
-        console.error(`Google Places API Error: ${response.data.status}`);
-        return [];
-      }
-
-      // Map Google Places results to our Place interface
-      return response.data.results.map((place: any) => ({
+      const results = response.data.results.slice(0, 5);
+      console.log(results);
+      // Process results here
+      return results.map((place: any) => ({
         id: place.place_id,
         displayName: place.name,
         location: {
