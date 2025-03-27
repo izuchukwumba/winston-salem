@@ -19,10 +19,7 @@ interface MapProps {
   searchQuery?: string;
 }
 
-const Map: React.FC<MapProps> = ({
-  apiKey,
-  searchQuery = "homeless shelter near me",
-}) => {
+const Map: React.FC<MapProps> = ({ apiKey, searchQuery = "college" }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<google.maps.Map | null>(null);
   const [userMarker, setUserMarker] =
@@ -38,6 +35,26 @@ const Map: React.FC<MapProps> = ({
     longitude: number;
   } | null>(null);
   const [mapLoaded, setMapLoaded] = useState<boolean>(false);
+
+  // Get current location first, then load Google Maps API
+  useEffect(() => {
+    const getLocation = async () => {
+      try {
+        const location = await getCurrentLocation();
+        setUserLocation(location);
+
+        // Now load the Google Maps script
+        loadGoogleMapsScript();
+      } catch (error) {
+        console.error("Error getting location:", error);
+        // Load maps anyway with default location
+        setUserLocation({ latitude: 36.1319, longitude: -80.2553 });
+        loadGoogleMapsScript();
+      }
+    };
+
+    getLocation();
+  }, [apiKey]);
 
   // Get current location
   const getCurrentLocation = async (): Promise<{
@@ -89,26 +106,6 @@ const Map: React.FC<MapProps> = ({
 
     document.head.appendChild(script);
   };
-
-  // Get current location first, then load Google Maps API
-  useEffect(() => {
-    const getLocation = async () => {
-      try {
-        const location = await getCurrentLocation();
-        setUserLocation(location);
-
-        // Now load the Google Maps script
-        loadGoogleMapsScript();
-      } catch (error) {
-        console.error("Error getting location:", error);
-        // Load maps anyway with default location
-        setUserLocation({ latitude: 36.1319, longitude: -80.2553 });
-        loadGoogleMapsScript();
-      }
-    };
-
-    getLocation();
-  }, [apiKey]);
 
   // Initialize the map
   const initializeMap = async () => {

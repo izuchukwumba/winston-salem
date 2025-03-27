@@ -5,7 +5,6 @@ import { Place, SearchParams } from "./map_types";
 import { MAP_CONFIG, SEARCH_CONFIG } from "./map_config";
 import dotenv from "dotenv";
 dotenv.config();
-
 class BackendMapService {
   private client: Client;
   private apiKey: string | any;
@@ -24,14 +23,13 @@ class BackendMapService {
   async searchPlaces(params: SearchParams): Promise<Place[]> {
     try {
       // Create bounds for search area
-      const radius = params.radius || MAP_CONFIG.searchRadius * 111000; // Convert degrees to meters (roughly)
 
       // Use Google Maps Places API
       const response = await this.client.textSearch({
         params: {
           query: params.query,
           location: `${params.lat},${params.lng}`,
-          radius: radius,
+          radius: params.radius,
           key: this.apiKey,
           language: SEARCH_CONFIG.language as any,
           region: SEARCH_CONFIG.region,

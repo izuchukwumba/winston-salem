@@ -1,6 +1,6 @@
 // mapApi.ts - Frontend API client for communicating with the backend
 
-import { Place, SearchParams } from "./map_types";
+import { Place } from "./map_types";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

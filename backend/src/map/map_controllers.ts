@@ -1,13 +1,14 @@
 // mapRoutes.ts - Express routes for the map API
 
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import mapService from "./map_backend";
+import { MAP_CONFIG } from "./map_config";
 
 /**
- * GET /api/places/search
+ * GET /map/places/search
  * Search for places based on query and location
  */
-export const searchPlaces = async (req: Request, res: Response) => {
+export const searchPlaces_controller = async (req: Request, res: Response) => {
   try {
     const { query, lat, lng, radius, openNow } = req.query;
 
@@ -24,10 +25,9 @@ export const searchPlaces = async (req: Request, res: Response) => {
       query: query as string,
       lat: parseFloat(lat as string),
       lng: parseFloat(lng as string),
-      radius: radius ? parseFloat(radius as string) : undefined,
+      radius: radius ? parseFloat(radius as string) : MAP_CONFIG.searchRadius,
       openNow: openNow === "true",
     };
-
     // Perform search
     const places = await mapService.searchPlaces(searchParams);
 
@@ -42,10 +42,10 @@ export const searchPlaces = async (req: Request, res: Response) => {
 };
 
 /**
- * GET /api/directions
+ * GET /map/directions
  * Get directions between two points
  */
-export const directions = async (req: Request, res: Response) => {
+export const directions_controller = async (req: Request, res: Response) => {
   try {
     const { originLat, originLng, destLat, destLng, mode } = req.query;
 
