@@ -77,7 +77,7 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
           }
         );
       } else {
-        console.error("Geolocation is not supported by this browser.");
+        console.log("Geolocation is not supported by this browser.");
         // Default to Winston-Salem
         resolve({ latitude: 36.1319, longitude: -80.2553 });
       }

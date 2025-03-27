@@ -37,7 +37,6 @@ const Chat: React.FC = () => {
         },
       }
     );
-    console.log(response.data);
     setMessages((prev) => [
       ...prev,
       {
@@ -100,7 +99,7 @@ const Chat: React.FC = () => {
       {/* chat input */}
       <div>
         <div
-          className="w-full flex justify-center items-center mb-10 border-y border-gray-300 py-6 px-5"
+          className="w-full flex justify-center items-center mb-2 border-y border-gray-300 py-6 px-5"
           onClick={() => document.getElementById("messageBox")?.focus()}
         >
           <div className="flex-grow flex items-center h-full w-full">

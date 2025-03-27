@@ -109,7 +109,6 @@ class BackendMapService {
         },
       });
       const results = response.data.results.slice(0, 5);
-      console.log(results);
       // Process results here
       return results.map((place: any) => ({
         id: place.place_id,

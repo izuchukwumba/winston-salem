@@ -14,7 +14,6 @@ export const getChatResponse: RequestHandler = async (
     apiKey: process.env.GROQ_API_KEY,
   });
 
-  console.log(req.body);
   const { prompt, tag } = req.body as ChatRequest;
 
   const MESSAGES = {
@@ -48,7 +47,6 @@ export const getChatResponse: RequestHandler = async (
 
     const request_response = chatCompletion.choices[0].message.content;
     const request_json = JSON.parse(request_response as string);
-    console.log(request_json);
     const request_type = request_json["response"];
     const request_explanation = request_json["explanation"];
 
@@ -70,14 +68,12 @@ export const getChatResponse: RequestHandler = async (
         response_format: { type: "text" },
       });
       const response_content = text_response.choices[0].message.content;
-      console.log(response_content);
       res.status(200).json({
         response_content,
         query_type: request_type,
       });
     } else {
       const map_query = request_json["map_query"];
-      console.log("map query", map_query);
       // const map_response = await groq.chat.completions.create({
       //   messages: [{ role: "user", content: "prompt" }],
       //   model: process.env.GROQ_API_MODEL as string,
