@@ -9,3 +9,9 @@
   flex-direction: column;
   height: 100vh;
 }
+
+.chat-markup-bold {
+  font-weight: bold;
+  color: blue;
+  font-size: 1.1rem;
+}

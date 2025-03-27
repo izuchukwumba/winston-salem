@@ -19,7 +19,7 @@ interface MapProps {
   searchQuery?: string;
 }
 
-const Map: React.FC<MapProps> = ({ apiKey, searchQuery = "college" }) => {
+const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<google.maps.Map | null>(null);
   const [userMarker, setUserMarker] =
@@ -414,10 +414,14 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery = "college" }) => {
         destLat: number,
         destLng: number
       ) {
-        if (mapInstance && userMarker) {
-          const userPos = userMarker.position as google.maps.LatLng;
-          const destPos = new window.google.maps.LatLng(destLat, destLng);
-          await showDirections(userPos, destPos);
+        try {
+          if (mapInstance && userMarker) {
+            const userPos = userMarker.position as google.maps.LatLng;
+            const destPos = new window.google.maps.LatLng(destLat, destLng);
+            await showDirections(userPos, destPos);
+          }
+        } catch (error) {
+          console.error("Error showing directions:", error);
         }
       };
     }
@@ -437,7 +441,15 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery = "college" }) => {
           <p>Loading results...</p>
         </div>
       )}
-      <div ref={mapRef} style={{ width: "100%", height: "100vh" }} />
+      <div
+        ref={mapRef}
+        style={{
+          width: "100%",
+          height: "40vh",
+          borderRadius: "15px",
+          border: "1px solid #1c1c1c",
+        }}
+      />
     </div>
   );
 };
