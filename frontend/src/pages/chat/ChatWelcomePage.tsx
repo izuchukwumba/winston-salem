@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 const ChatWelcomePage: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="max-h-screen flex flex-col ">
+    <div className="h-screen flex flex-col ">
       <ChatNavBar />
-      <div className="flex-1 flex flex-col items-center mt-5 gap-y-20">
+      <div className="flex-1 flex flex-col items-center mt-5 gap-y-10  overflow-y-auto">
         <div className="font-[inter] text-lg font-bold">Chat with us !!!</div>
         <img
           src="/assets/city_of_winston_salem_logo.jpg"
