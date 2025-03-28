@@ -66,7 +66,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[100vh] max-h-screen flex flex-col relative">
+    <div className="min-h-[100%] max-h-screen flex flex-col relative">
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
@@ -76,7 +76,7 @@ const Chat: React.FC = () => {
         />
       </div>
       {/* chat navbar */}
-      <div className="sticky top-0 left-0 right-0 z-10000 flex-shrink-0 ">
+      <div className="fixed top-0 left-0 right-0 z-10000 flex-shrink-0 ">
         <ChatNavBar />
         <div className="flex items-center gap-x-2 pl-10 py-5 border-b border-gray-300 z-10000 bg-white">
           <div className="w-12 h-12  relative ">
@@ -92,7 +92,7 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat messages */}
-      <div className="z-10 flex-grow overflow-y-auto mt-1">
+      <div className="z-10 flex-grow overflow-y-auto mt-40">
         <ChatMessages messages={messages} />
       </div>
 
