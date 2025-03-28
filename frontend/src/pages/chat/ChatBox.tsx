@@ -66,7 +66,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80%] max-h-[100vh] flex flex-col relative overflow-hidden">
+    <div className="min-h-[100%] max-h-[100%] flex flex-col relative overflow-hidden">
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
