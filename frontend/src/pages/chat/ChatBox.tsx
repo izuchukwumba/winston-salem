@@ -66,7 +66,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[100%] max-h-[100%] flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-[100%] max-h-full flex flex-col justify-between relative overflow-hidden">
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
@@ -76,10 +76,10 @@ const Chat: React.FC = () => {
         />
       </div>
       {/* chat navbar */}
-      <div className="fixed top-0 left-0 right-0 z-10000 flex-shrink-0 ">
+      <div className="fixed top-0 left-0 right-0 z-10000 flex-shrink-0">
         <ChatNavBar />
         <div className="flex items-center gap-x-2 pl-10 py-5 border-b border-gray-300 z-10000 bg-white">
-          <div className="w-12 h-12  relative ">
+          <div className="w-12 h-12 relative">
             <img
               src="/assets/user_sarah.jpg"
               alt="user_icon"
@@ -87,7 +87,7 @@ const Chat: React.FC = () => {
             />
             <div className="absolute bottom-1 right-0 w-3 h-3 bg-green-600 rounded-full"></div>
           </div>
-          <div className="font-[inter] font-bold">Linda</div>
+          <div className="font-[inter] font-bold">Lindaa</div>
         </div>
       </div>
 
