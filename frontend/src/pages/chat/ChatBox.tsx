@@ -92,7 +92,7 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat messages */}
-      <div className="flex flex-col justify-end flex-grow z-10 overflow-y-auto mt-40 mb-16">
+      <div className="flex flex-col justify-end flex-grow z-10 overflow-y-auto mt-40 mb-18">
         <ChatMessages messages={messages} />
       </div>
 
