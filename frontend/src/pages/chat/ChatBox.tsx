@@ -66,7 +66,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[100%] max-h-[100%] flex flex-col relative overflow-hidden">
+    <div className="min-h-[100%] max-h-[100%] flex flex-col relative overflow-y-auto">
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
@@ -87,7 +87,7 @@ const Chat: React.FC = () => {
             />
             <div className="absolute bottom-1 right-0 w-3 h-3 bg-green-600 rounded-full"></div>
           </div>
-          <div className="font-[inter] font-bold">Lindaa</div>
+          <div className="font-[inter] font-bold">Linda</div>
         </div>
       </div>
 
