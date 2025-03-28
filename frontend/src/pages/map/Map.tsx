@@ -234,11 +234,12 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
     }
 
     try {
+      const my_current_location = await getCurrentLocation();
       // Fetch search results from backend API
       const places = await fetchSearchResults(
         query,
-        userLocation.latitude,
-        userLocation.longitude
+        my_current_location.latitude,
+        my_current_location.longitude
       );
 
       if (places && places.length > 0) {
