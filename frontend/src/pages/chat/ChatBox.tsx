@@ -76,7 +76,7 @@ const Chat: React.FC = () => {
         />
       </div>
       {/* chat navbar */}
-      <div className="absolute top-0 left-0 right-0 z-10000 flex-shrink-0 ">
+      <div className="fixed top-0 left-0 right-0 z-10000 flex-shrink-0 ">
         <ChatNavBar />
         <div className="flex items-center gap-x-2 pl-10 py-5 border-b border-gray-300 z-10000 bg-white">
           <div className="w-12 h-12  relative ">
@@ -92,14 +92,14 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat messages */}
-      <div className="z-10 flex-grow overflow-y-auto mt-1 mb-2">
+      <div className="z-10 flex-grow overflow-y-auto mt-40 pb-18">
         <ChatMessages messages={messages} />
       </div>
 
       {/* chat input */}
-      <div className="bg-white z-1000 absolute bottom-0 left-0 right-0 flex-shrink-0">
+      <div className="bg-white z-1000 fixed bottom-0 left-0 right-0 flex-shrink-0">
         <div
-          className="w-full flex justify-between items-center mb-2 border-y border-gray-300 py-6 px-5"
+          className="w-full flex justify-between items-center border-y border-gray-300 py-6 px-5"
           onClick={() => document.getElementById("messageBox")?.focus()}
         >
           {/* <div className=""> */}
