@@ -40,13 +40,20 @@ const Answers: React.FC<{ content: string }> = ({ content }) => {
       /\*\*(.*?)\*\*/g,
       "<span class='font-bold '>$1</span>"
     );
+
     // Convert to lines
     const lines = response.split("\n");
-    return lines.map((line, index) => (
-      <div key={index} className="mb-2">
-        <span dangerouslySetInnerHTML={{ __html: line }} />
-      </div>
-    ));
+    return lines.map((line, index) => {
+      if (line.startsWith("###")) {
+        const text = line.replace(/^###\s*/, "");
+        line = `<span class='font-bold text-purple-800'>${text}</span>`;
+      }
+      return (
+        <div key={index} className="mb-2">
+          <span dangerouslySetInnerHTML={{ __html: line }} />
+        </div>
+      );
+    });
   };
 
   const formattedResponse = responseFormat(content); //entire content
