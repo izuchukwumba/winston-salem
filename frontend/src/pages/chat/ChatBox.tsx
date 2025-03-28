@@ -92,7 +92,7 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat messages */}
-      <div className="z-10 overflow-y-auto pt-40 pb-18">
+      <div className="z-10 overflow-y-auto mt-40 mb-18">
         <ChatMessages messages={messages} />
       </div>
 
