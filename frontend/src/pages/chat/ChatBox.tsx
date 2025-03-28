@@ -87,12 +87,12 @@ const Chat: React.FC = () => {
             />
             <div className="absolute bottom-1 right-0 w-3 h-3 bg-green-600 rounded-full"></div>
           </div>
-          <div className="font-[inter] font-bold">Lindaaa</div>
+          <div className="font-[inter] font-bold">Linda</div>
         </div>
       </div>
 
       {/* chat messages */}
-      <div className="z-10 overflow-y-auto">
+      <div className="z-10 overflow-y-auto pt-40">
         <ChatMessages messages={messages} />
       </div>
 
