@@ -15,3 +15,11 @@
   color: blue;
   font-size: 1.1rem;
 }
+
+textarea {
+  field-sizing: content;
+  max-width: 90%;
+  /* outline: 1px solid gray; */
+  /* border-radius: 10px; */
+  /* padding: 10px; */
+}

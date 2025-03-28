@@ -66,7 +66,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col relative">
+    <div className="h-screen flex flex-col relative">
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
@@ -76,7 +76,7 @@ const Chat: React.FC = () => {
         />
       </div>
       {/* chat navbar */}
-      <div>
+      <div className="flex-shrink-0 ">
         <ChatNavBar />
         <div className="flex items-center gap-x-2 pl-10 py-5 border-b border-gray-300 z-10000 bg-white">
           <div className="w-12 h-12  relative ">
@@ -92,36 +92,36 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat messages */}
-      <div className="z-10000 flex-grow overflow-y-auto mt-3 mb-2">
+      <div className="z-10000 flex-grow overflow-y-auto mt-1 mb-2">
         <ChatMessages messages={messages} />
       </div>
 
       {/* chat input */}
-      <div>
+      <div className="flex-shrink-0">
         <div
-          className="w-full flex justify-center items-center mb-2 border-y border-gray-300 py-6 px-5"
+          className="w-full flex justify-between items-center mb-2 border-y border-gray-300 py-6 px-5"
           onClick={() => document.getElementById("messageBox")?.focus()}
         >
-          <div className="flex-grow flex items-center h-full w-full">
-            <textarea
-              id="messageBox"
-              placeholder="Write a message"
-              className=" outline-none resize-none leading-tight max-h-[500px]  overflow-hidden placeholder:font-[inter] placeholder:text-gray-400 placeholder:text-md"
-              rows={1}
-              value={newPrompt.prompt}
-              onChange={(e) =>
-                setNewPrompt({
-                  prompt: e.target.value,
-                  tag: "question",
-                })
-              }
-            />
-          </div>
+          {/* <div className=""> */}
+          <textarea
+            id="messageBox"
+            placeholder="Write a message"
+            className="textarea outline-none resize-none leading-tight  placeholder:font-[inter] placeholder:text-gray-400 placeholder:text-md"
+            rows={1}
+            value={newPrompt.prompt}
+            onChange={(e) =>
+              setNewPrompt({
+                prompt: e.target.value,
+                tag: "question",
+              })
+            }
+          ></textarea>
+          {/* </div> */}
           <SendHorizontal
             size={27}
             color="#667085"
             strokeWidth={2.5}
-            className="z-10000"
+            className="z-1000"
             onClick={(event) => {
               event.stopPropagation();
               handleSendMessage(newPrompt.prompt);

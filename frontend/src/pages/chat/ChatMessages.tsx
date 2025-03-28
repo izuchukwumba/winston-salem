@@ -4,8 +4,8 @@ import Map from "../map/Map";
 
 const Questions: React.FC<{ content: string }> = ({ content }) => {
   return (
-    <div className="flex flex-col gap-y-1 items-end mr-4">
-      <div className="text-white text-lg font-[inter] bg-gray-800 rounded-lg py-2 px-4">
+    <div className="flex flex-col gap-y-1 items-end mr-4 ">
+      <div className="text-gray-200 text-md  bg-gray-800 rounded-lg py-2 px-4 ml-16">
         {content}
       </div>
       <div className="text-gray-500 text-xs mr-1">
@@ -53,7 +53,7 @@ const Answers: React.FC<{ content: string }> = ({ content }) => {
   const truncatedResponse = responseFormat(content.slice(0, 200)); //first 100 characters
 
   return (
-    <div className="flex flex-col gap-y-2 items-start ml-4 mr-10 mt-4">
+    <div className="flex flex-col gap-y-2 items-start ml-4 mr-10 my-4 ">
       <div className="text-md bg-gray-50 border border-gray-400 rounded-2xl py-2 px-4">
         {isExpanded ? formattedResponse : truncatedResponse}
         {isTooLong && (
