@@ -36,6 +36,22 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
   } | null>(null);
   const [mapLoaded, setMapLoaded] = useState<boolean>(false);
 
+  useEffect(() => {
+    // Request location permission when component mounts
+    if (navigator.geolocation) {
+      setIsLoading(true);
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then((permissionStatus) => {
+          console.log("Geolocation permission:", permissionStatus.state);
+          if (permissionStatus.state === "prompt") {
+            alert("Please allow location access to see places near you");
+          }
+          setIsLoading(false);
+        });
+    }
+  }, []);
+
   // Get current location first, then load Google Maps API
   useEffect(() => {
     const getLocation = async () => {
@@ -71,9 +87,14 @@ const Map: React.FC<MapProps> = ({ apiKey, searchQuery }) => {
             });
           },
           (error) => {
-            console.error(`Geolocation error: ${error.message}`);
+            console.log(`Geolocation error: ${error.message}`);
             // Default to Winston-Salem
             // resolve({ latitude: 36.1319, longitude: -80.2553 });
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
           }
         );
       } else {
