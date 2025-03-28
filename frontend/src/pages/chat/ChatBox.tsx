@@ -92,12 +92,12 @@ const Chat: React.FC = () => {
       </div>
 
       {/* chat messages */}
-      <div className="z-10 overflow-y-auto pt-40">
+      <div className="z-10 overflow-y-auto pt-40 pb-18">
         <ChatMessages messages={messages} />
       </div>
 
       {/* chat input */}
-      <div className="bg-white z-1000 sticky bottom-0 left-0 right-0 flex-shrink-0">
+      <div className="bg-white z-1000 fixed bottom-0 left-0 right-0 flex-shrink-0">
         <div
           className="w-full flex justify-between items-center border-y border-gray-300 py-6 px-5"
           onClick={() => document.getElementById("messageBox")?.focus()}
