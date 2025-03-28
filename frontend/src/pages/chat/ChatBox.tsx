@@ -66,7 +66,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col relative">
+    <div className="max-h-screen flex flex-col relative">
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
