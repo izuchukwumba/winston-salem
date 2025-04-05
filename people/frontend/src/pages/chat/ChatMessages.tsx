@@ -84,6 +84,7 @@ const ChatMessages: React.FC<{
     content: string;
     query_type: string;
     map_query: string;
+    isLoading: boolean;
   }[];
 }> = ({ messages }) => {
   return (
@@ -119,7 +120,17 @@ const ChatMessages: React.FC<{
             </div>
           );
         } else {
-          return <Answers content={message.content} key={index} />;
+          return (
+            <>
+              {message.isLoading ? (
+                <div className="flex justify-center items-center">
+                  <div className="w-4 h-4 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+                </div>
+              ) : (
+                <Answers content={message.content} key={index} />
+              )}
+            </>
+          );
         }
       })}
     </div>

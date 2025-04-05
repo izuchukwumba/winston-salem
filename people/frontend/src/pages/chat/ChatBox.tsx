@@ -5,6 +5,7 @@ import { SendHorizontal } from "lucide-react";
 import axios from "axios";
 
 const Chat: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [newPrompt, setNewPrompt] = useState<{
     prompt: string;
     tag: string;
@@ -18,6 +19,7 @@ const Chat: React.FC = () => {
       content: string;
       query_type: string;
       map_query: string;
+      isLoading: boolean;
     }[]
   >([]);
 
@@ -28,6 +30,7 @@ const Chat: React.FC = () => {
   }, [messages]);
 
   const analyzePrompt = async (prompt: string) => {
+    setIsLoading(true);
     const response = await axios.post(
       `${BACKEND_URL}/chat/get-chat-response`,
       { prompt },
@@ -44,8 +47,10 @@ const Chat: React.FC = () => {
         content: response.data.response_content,
         query_type: response.data.query_type,
         map_query: response.data.map_query,
+        isLoading: false,
       },
     ]);
+    setIsLoading(false);
   };
 
   const handleSendMessage = (prompt: string) => {
@@ -56,7 +61,13 @@ const Chat: React.FC = () => {
     });
     setMessages((prev) => [
       ...prev,
-      { tag: "question", content: prompt, query_type: "text", map_query: "" },
+      {
+        tag: "question",
+        content: prompt,
+        query_type: "text",
+        map_query: "",
+        isLoading: false,
+      },
     ]);
     analyzePrompt(prompt);
     setNewPrompt({
@@ -134,3 +145,5 @@ const Chat: React.FC = () => {
 };
 
 export default Chat;
+
+//
