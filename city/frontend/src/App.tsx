@@ -1,12 +1,16 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ReportPage from "./pages/ReportPage";
 import "./App.css";
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-red-500 underline">
-        Vite + React
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/report" element={<ReportPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

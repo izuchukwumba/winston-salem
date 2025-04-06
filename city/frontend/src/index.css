@@ -9,3 +9,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@theme {
+  --font-inter: "Inter", "sans-serif";
+  --font-heebo: "Heebo", "sans-serif";
+  --font-playfair: "Playfair Display", "serif";
+  --color-primary: "#25228b";
+}
