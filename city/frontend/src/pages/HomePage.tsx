@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const backgroundStyle = {
   backgroundImage: "url('assets/city-of-ws-2.jpeg')",
@@ -11,15 +12,10 @@ const backgroundStyle = {
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div style={backgroundStyle} className="h-screen flex flex-col">
-      <div className="fixed top-0 left-0 w-full h-full bg-white opacity-70"></div>
+    <div className="flex flex-col">
       <div className="relative z-10 h-100">
-        <div className="bg-[#25228B] flex justify-center items-center py-4 mb-35">
-          <div className="text-white text-2xl lg:text-4xl  font-bold font-playfair ">
-            City of Winston-Salem
-          </div>
-        </div>
-        <div className="flex flex-col justify-center items-center py-4 h-100 gap-y-20">
+        <Header />
+        <div className="flex flex-col justify-center items-center py-4 h-100 gap-y-20 mt-35">
           <div className="bg-white text-[#25228B] border-1 border-[#25228B] text-xl font-inter px-4 py-2 rounded-md">
             Select an option
           </div>
