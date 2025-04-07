@@ -8,6 +8,7 @@ const backgroundStyle = {
   height: "100vh",
   width: "100%",
 };
+//console.log('test)
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
