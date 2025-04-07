@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
-const backgroundStyle = {
-  backgroundImage: "url('assets/city-of-ws-2.jpeg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  height: "100vh",
-  width: "100%",
-};
+// const backgroundStyle = {
+//   backgroundImage: "url('assets/city-of-ws-2.jpeg')",
+//   backgroundSize: "cover",
+//   backgroundPosition: "center",
+//   height: "100vh",
+//   width: "100%",
+// };
 //console.log('test)
 
 const HomePage: React.FC = () => {

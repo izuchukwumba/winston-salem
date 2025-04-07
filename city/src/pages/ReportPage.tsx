@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";

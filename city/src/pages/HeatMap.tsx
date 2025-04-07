@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GoogleMap, LoadScript, HeatmapLayer } from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import {
   LineChart,
   Line,
@@ -33,7 +33,7 @@ const HeatMap: React.FC<HeatMapProps> = ({ selectedYears }) => {
   const [trendData, setTrendData] = useState<
     { year: string; count: number; location: string }[] | null
   >(null);
-  const [selectedEntry, setSelectedEntry] = useState<any | null>(null);
+  // const [selectedEntry, setSelectedEntry] = useState<any | null>(null);
 
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -320,7 +320,7 @@ const HeatMap: React.FC<HeatMapProps> = ({ selectedYears }) => {
               });
 
               if (match) {
-                setSelectedEntry(match);
+                // setSelectedEntry(match);
                 handleHeatInfo(lat, lng);
               }
             }
