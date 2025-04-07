@@ -5,7 +5,7 @@ import { SendHorizontal } from "lucide-react";
 import axios from "axios";
 
 const Chat: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [newPrompt, setNewPrompt] = useState<{
     prompt: string;
     tag: string;
@@ -30,7 +30,7 @@ const Chat: React.FC = () => {
   }, [messages]);
 
   const analyzePrompt = async (prompt: string) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const response = await axios.post(
       `${BACKEND_URL}/chat/get-chat-response`,
       { prompt },
@@ -50,7 +50,7 @@ const Chat: React.FC = () => {
         isLoading: false,
       },
     ]);
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   const handleSendMessage = (prompt: string) => {
