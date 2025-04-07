@@ -3,11 +3,11 @@ import HeatMap from "./HeatMap";
 import HeatMapSideBar from "../components/HeatMapSideBar";
 import { useState } from "react";
 const Map = () => {
-  const [selectedYears, setSelectedYears] = useState<string[]>([]);
+  const [selectedYears, setSelectedYears] = useState<string[]>(["2025"]);
 
   return (
     <div className="relative flex flex-col h-screen">
-      <Header />
+      <Header backButton={true} />
       <div className="flex flex-1 overflow-hidden">
         <HeatMap selectedYears={selectedYears} />{" "}
         <div className="z-60 absolute top-50 right-0">

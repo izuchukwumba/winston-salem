@@ -14,22 +14,30 @@ const HomePage: React.FC = () => {
   return (
     <div className="flex flex-col">
       <div className="relative z-10 h-100">
-        <Header />
-        <div className="flex flex-col justify-center items-center py-4 h-100 gap-y-20 mt-35">
-          <div className="bg-white text-[#25228B] border-1 border-[#25228B] text-xl font-inter px-4 py-2 rounded-md">
+        <Header backButton={false} />
+        <div className="flex flex-col justify-center items-center py-4 h-100 gap-y-10 mt-35">
+          <div className="bg-white text-[#25228B] border-1 border-[#25228B] text-xl font-inter px-4 py-2 rounded-md mb-20">
             Select an option
           </div>
-          <div className="flex flex-col lg:flex-row justify-center items-center gap-y-6 lg:gap-y-0 lg:gap-x-14 w-full text-lg lg:text-xl mb-20">
-            <div className="bg-[#25228B] text-white font-bold font-playfair px-12 py-2 rounded-md cursor-pointer">
-              I need help
+          <div className="flex flex-col justify-center items-center gap-y-10 mb-20">
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-y-6 lg:gap-y-0 lg:gap-x-14 w-full text-lg lg:text-xl">
+              <div className="bg-[#25228B] text-white font-bold font-playfair px-12 py-2 rounded-md cursor-pointer">
+                I need help
+              </div>
+              <div
+                className="bg-[#25228B] text-white font-bold font-playfair px-5 py-2 rounded-md cursor-pointer"
+                onClick={() => {
+                  navigate("/report");
+                }}
+              >
+                I am here to report
+              </div>
             </div>
             <div
-              className="bg-[#25228B] text-white font-bold font-playfair px-5 py-2 rounded-md cursor-pointer"
-              onClick={() => {
-                navigate("/report");
-              }}
+              className="bg-white text-black border-1 border-[#25228B] text-base lg:text-xl font-playfair italic px-8 lg:px-10 py-3 rounded-md cursor-pointer"
+              onClick={() => navigate("/mappage")}
             >
-              I am here to report
+              View Heatmap
             </div>
           </div>
           <div className="bg-[#25228B] text-white text-lg lg:text-2xl font-playfair italic px-8 lg:px-20 py-5 rounded-md">

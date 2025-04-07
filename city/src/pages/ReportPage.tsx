@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 const libraries: "places"[] = ["places"];
 
@@ -22,6 +23,8 @@ const ReportPage: React.FC = () => {
     setLatitude(place?.geometry?.location?.lat() || 0);
   };
 
+  const navigate = useNavigate();
+
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async () => {
@@ -37,24 +40,35 @@ const ReportPage: React.FC = () => {
       notes,
     };
     console.log(payload);
-    const response = await fetch(`${BACKEND_URL}/heatmap/save-entry`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    if (response.ok) {
-      console.log("Entry saved successfully");
-    } else {
-      console.error("Failed to save entry");
+    try {
+      const response = await fetch(`${BACKEND_URL}/heatmap/save-entry`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        console.log("Entry saved successfully");
+      } else {
+        console.error("Failed to save entry");
+      }
+    } catch (error) {
+      console.error("Error saving entry:", error);
+    } finally {
+      setName("");
+      setEmailAddress("");
+      setLocation("");
+      setNumberOfHomeless(0);
+      setNotes("");
+      navigate("/mappage");
     }
   };
 
   return (
     <div className="w-full">
       <div className="relative w-full h-full z-10 text-black font-inter">
-        <Header />
+        <Header backButton={true} />
         <div className="flex justify-center items-center mt-10 lg:mt-20">
           <div className="flex flex-col justify-center items-center bg-white px-10 lg:px-30 py-15 rounded-3xl ">
             <div className="flex flex-col  gap-y-4 lg:gap-y-10 text-[#25228b] text-sm">
