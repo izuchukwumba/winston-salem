@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import Header from "../components/Header";
 
@@ -6,7 +6,7 @@ const libraries: "places"[] = ["places"];
 
 const ReportPage: React.FC = () => {
   const [name, setName] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  // const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [emailAddress, setEmailAddress] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [numberOfHomeless, setNumberOfHomeless] = useState<number>(0);
@@ -21,33 +21,28 @@ const ReportPage: React.FC = () => {
     setLongitude(place?.geometry?.location?.lng() || 0);
     setLatitude(place?.geometry?.location?.lat() || 0);
   };
-  // const handleSubmit = () => {
-  //   console.log({
-  //     name,
-  //     phoneNumber,
-  //     emailAddress,
-  //     location,
-  //     longitude,
-  //     latitude,
-  //     numberOfHomeless,
-  //   });
-  // };
 
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async () => {
+    const payload = {
+      date: new Date().toISOString(), // Full timestamp
+      year: new Date().getFullYear(), // Current year
+      reporter: name, // From input
+      email: emailAddress, // From input
+      location, // From autocomplete
+      longitude,
+      latitude,
+      count: numberOfHomeless, // Renamed to match "COUNT" in header
+      notes,
+    };
+    console.log(payload);
     const response = await fetch(`${BACKEND_URL}/heatmap/save-entry`, {
       method: "POST",
-      body: JSON.stringify({
-        name,
-        phoneNumber,
-        emailAddress,
-        location,
-        longitude,
-        latitude,
-        numberOfHomeless,
-        notes,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
     if (response.ok) {
       console.log("Entry saved successfully");
