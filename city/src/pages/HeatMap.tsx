@@ -240,7 +240,7 @@ const HeatMap: React.FC<HeatMapProps> = ({ selectedYears }) => {
   );
 
   const heatLayerOptions = {
-    radius: 15, // controls size of the blobs (default: 20)
+    radius: 25, // controls size of the blobs (default: 20)
     opacity: 1, // 0 to 1
     dissipating: true, // should blobs shrink when zoomed out?
     gradient: [
@@ -308,7 +308,7 @@ const HeatMap: React.FC<HeatMapProps> = ({ selectedYears }) => {
               const lng = e.latLng?.lng();
               if (!lat || !lng) return;
 
-              const radius = 0.0008; // ~90 meters
+              const radius = 0.001; // ~90 meters
 
               const match = locationEntries.find((entry) => {
                 return (

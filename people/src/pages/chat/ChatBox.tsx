@@ -5,7 +5,7 @@ import { SendHorizontal } from "lucide-react";
 import axios from "axios";
 
 const Chat: React.FC = () => {
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [newPrompt, setNewPrompt] = useState<{
     prompt: string;
     tag: string;
@@ -53,31 +53,46 @@ const Chat: React.FC = () => {
     // setIsLoading(false);
   };
 
-  const handleSendMessage = (prompt: string) => {
+  const handleSendMessage = async (prompt: string) => {
     console.log(newPrompt);
-    setNewPrompt({
-      prompt: prompt,
-      tag: "question",
-    });
-    setMessages((prev) => [
-      ...prev,
-      {
+    try {
+      setIsLoading(true);
+      setNewPrompt({
+        prompt: prompt,
         tag: "question",
-        content: prompt,
-        query_type: "text",
-        map_query: "",
-        isLoading: false,
-      },
-    ]);
-    analyzePrompt(prompt);
-    setNewPrompt({
-      prompt: "",
-      tag: "",
-    });
+      });
+      setMessages((prev) => [
+        ...prev,
+        {
+          tag: "question",
+          content: prompt,
+          query_type: "text",
+          map_query: "",
+          isLoading: false,
+        },
+      ]);
+      await analyzePrompt(prompt);
+      setNewPrompt({
+        prompt: "",
+        tag: "",
+      });
+      // setIsLoading(false);
+    } catch (error) {
+      console.error("Error sending message", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="h-screen flex flex-col justify-between relative overflow-hidden">
+      {/* Loading screen */}
+      {/* {isLoading && (
+        <div className="fixed left-0 top-0 w-screen h-screen bg-red-500">
+          <div className="text-gray-500 text-md">Loading...</div>
+        </div>
+      )} */}
+
       {/* background image */}
       <div className="absolute inset-0  flex justify-center items-center pointer-events-none z-0">
         <img
@@ -104,7 +119,7 @@ const Chat: React.FC = () => {
 
       {/* chat messages */}
       <div className="flex flex-col justify-end flex-grow z-10 overflow-y-auto mt-40 mb-20">
-        <ChatMessages messages={messages} />
+        <ChatMessages messages={messages} isLoading={isLoading} />
       </div>
 
       {/* chat input */}

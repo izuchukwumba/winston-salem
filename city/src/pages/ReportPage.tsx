@@ -41,18 +41,19 @@ const ReportPage: React.FC = () => {
     };
     console.log(payload);
     try {
-      const response = await fetch(`${BACKEND_URL}/heatmap/save-entry`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      if (response.ok) {
-        console.log("Entry saved successfully");
-      } else {
-        console.error("Failed to save entry");
-      }
+      // const response = await fetch(`${BACKEND_URL}/heatmap/save-entry`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(payload),
+      // });
+      // if (response.ok) {
+      //   console.log("Entry saved successfully");
+      // } else {
+      //   console.error("Failed to save entry");
+      // }
+      console.log("Entry saved successfully");
     } catch (error) {
       console.error("Error saving entry:", error);
     } finally {

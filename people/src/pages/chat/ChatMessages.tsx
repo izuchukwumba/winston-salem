@@ -86,9 +86,19 @@ const ChatMessages: React.FC<{
     map_query: string;
     isLoading: boolean;
   }[];
-}> = ({ messages }) => {
+  isLoading: boolean;
+}> = ({ messages, isLoading }) => {
   return (
     <div>
+      {isLoading && (
+        <div className="fixed left-0 top-0 w-screen h-screen bg-gray-200 opacity-50">
+          <div className="flex justify-center items-center h-full">
+            <div className="font-inter font-bold opacity-100 text-black text-2xl">
+              Loading...
+            </div>
+          </div>
+        </div>
+      )}
       {messages.map((message, index) => {
         if (message.tag === "question") {
           return <Questions content={message.content} key={index} />;
