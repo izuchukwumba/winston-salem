@@ -25,7 +25,7 @@ const ReportPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  // const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async () => {
     const payload = {
