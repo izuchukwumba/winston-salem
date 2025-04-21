@@ -15,7 +15,7 @@ const backgroundStyle = {
 function App() {
   return (
     <div style={backgroundStyle} className="h-screen">
-      <div className="fixed top-0 left-0 w-full h-full bg-white opacity-70"></div>
+      <div className="fixed top-0 left-0 w-full h-full bg-[#dcdbff] opacity-80"></div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
